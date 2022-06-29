@@ -63,70 +63,74 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextField(
-              cursorColor: Theme.of(context).primaryColor,
-              decoration: InputDecoration(
-                labelText: 'Title',
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Card(
+        child: Container(
+          height: 300,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextField(
+                cursorColor: Theme.of(context).primaryColor,
+                decoration: InputDecoration(
+                  labelText: 'Title',
+                ),
+                style: Theme.of(context).textTheme.headline4,
+                controller: _titleController,
+                onSubmitted: (_) => _submitData(),
               ),
-              style: Theme.of(context).textTheme.headline4,
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
-            ),
-            TextField(
-              cursorColor: Theme.of(context).primaryColor,
-              decoration: InputDecoration(
-                labelText: 'Amount',
+              TextField(
+                cursorColor: Theme.of(context).primaryColor,
+                decoration: InputDecoration(
+                  labelText: 'Amount',
+                ),
+                style: Theme.of(context).textTheme.headline4,
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submitData(),
               ),
-              style: Theme.of(context).textTheme.headline4,
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData(),
-            ),
-            Container(
-              height: 70,
-              child: Row(
+              Container(
+                height: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      (_selectedDate == null)
+                          ? 'No date chosen'
+                          : 'Transaction date: ${DateFormat.yMd().format(_selectedDate)}',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                    FlatButton(
+                      textColor: Theme.of(context).primaryColor,
+                      onPressed: _presentDatePicker,
+                      child: (_selectedDate == null)
+                          ? Text(
+                              'Choose Date',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          : null,
+                    )
+                  ],
+                ),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    (_selectedDate == null)
-                        ? 'No date chosen'
-                        : 'Transaction date: ${DateFormat.yMd().format(_selectedDate)}',
-                    style: Theme.of(context).textTheme.headline4,
+                  ProcessReceipt(_titleController, _amountController, _setDate),
+                  RaisedButton(
+                    child: Text(
+                      'Save Transaction',
+                      style: Theme.of(context).textTheme.button,
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    onPressed: _submitData,
                   ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: _presentDatePicker,
-                    child: (_selectedDate == null)
-                        ? Text(
-                            'Choose Date',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          )
-                        : null,
-                  )
                 ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ProcessReceipt(_titleController, _amountController, _setDate),
-                RaisedButton(
-                  child: Text(
-                    'Save Transaction',
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: _submitData,
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
