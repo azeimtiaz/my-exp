@@ -1,16 +1,18 @@
-# my_exp
+# My Exp
 
-A new Flutter project.
+A personal expense-tracking mobile application built with Flutter. 
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+The app allows users to enter their daily expenses and keep track of their weekly expeditures.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+A transaction detail can be added manually. The app also allows users to upload the receipt of a transaction from the galllery, or capture from the device camera, which will then be processed by a pre-trained OCR Model which extracts and returns the transaction details as text (transaction date, total amount, merchant name).
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Techonologies used
+
+- [Flutter framework](https://flutter.dev/)
+- [NanoNets API](https://nanonets.com/)
+- Firebase cloud storage
+- MongoDB database
+
